@@ -1,3 +1,3 @@
 # MattAhlman
 Hello World!\
-Intro To Programming class repository
+This is an Intro To Programming class repository
