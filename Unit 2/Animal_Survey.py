@@ -8,3 +8,7 @@ color_fav_anim = input("what color or colors are " + fav_animal + "s?\n>> ")
 
 print("Wow! So intresting!")
 fun_fact = input("What's a fun fact you about the " + fav_animal + "?\n>> ")
+diet_fav_anim = input("What do " + fav_animal + "s eat?\n>> ")
+
+print("That's so cool!")
+print("So your favorite animal is " + fav_animal + ". Which lives in " + live_fav_anim + ". Where they eat " + diet_fav_anim + ". You like " + fav_animal + "s because " + why_fav_anim + ". And they are colored " + color_fav_anim + ".")
