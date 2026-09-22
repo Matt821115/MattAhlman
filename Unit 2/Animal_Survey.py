@@ -1,0 +1,10 @@
+print("Welcome to the Animal Survey")
+fav_animal = input("What is your favorite animal?\n>> ")
+owned_animal = input("If you own an animal, what is it?\n>> ")
+why_fav_anim = input("Why is " + fav_animal + " your favorite animal?\n>> ")
+sound_fav_anim = input("What sound do " + fav_animal + "s make?\n>> ")
+live_fav_anim = input("Where do " + fav_animal + "s live?\n>> ")
+color_fav_anim = input("what color or colors are " + fav_animal + "s?\n>> ")
+
+print("Wow! So intresting!")
+fun_fact = input("What's a fun fact you about the " + fav_animal + "?\n>> ")
