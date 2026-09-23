@@ -1,4 +1,4 @@
-#nothing here so far
-"""multi line comment
-I think?"""
-#adda yadda demo
+number = input("Give me a number\n>> ")
+number = int(number)
+answer = str(number * 3)
+print("Your number times three: " + answer)
