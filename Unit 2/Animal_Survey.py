@@ -14,3 +14,4 @@ diet_fav_anim = input("What do " + fav_animal + "s eat?\n>> ")
 print("That's so cool!") #final reaction before summary
 #summary here ↓↓↓
 print("So your favorite animal is " + fav_animal + ". Which lives in " + live_fav_anim + ". Where they eat " + diet_fav_anim + ". You like " + fav_animal + "s because " + why_fav_anim + ". They are colored " + color_fav_anim + ". And the make the sound " + sound_fav_anim + ".")
+
