@@ -9,7 +9,7 @@ print("\n------------------------------\n") #seperator
 
 #   #2
 def add_three(x, y, z): #create a function to print the sum of numbers
-    print(float(x) + float(y) + float(z))
+    print(int(x) + int(y) + int(z))
 
 #define x, y, and z variables
 x_input = input("x=")
