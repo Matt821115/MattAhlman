@@ -5,16 +5,16 @@ print("Amazon Prime subscription\n\nTo purchase the yearly " \
 
 print("\n------------------------------------------------------\n")
 
-eligable = "test"
+eligable = bool(False)
 user_age = int(input("How old are you?\n>> "))
 if user_age < 18:
     permitted = input("Were you permitted to make this purchase by" \
     " an adult?\n>> ")
     if permitted.lower() == "y" or permitted.lower() == "yes":
-        eligable = bool(True)
+        eligable = True
     else:
-        eligable = bool(False)
+        eligable = False
 else:
-    eligable = bool(True)
+    eligable = True
 
 print(eligable)
