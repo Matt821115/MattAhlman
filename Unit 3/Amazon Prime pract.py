@@ -17,4 +17,13 @@ if user_age < 18:
 else:
     eligable = True
 
-print(eligable)
+# print(eligable)
+if eligable == True:
+    bal = float(input("What is your current bank balence?\n>> $"))
+
+    if bal >= 139.99:
+      print("You have subscribed to Amazon Prime!")
+    else:
+        print("We're sorry, you don't have enough money for this subscription")
+else:
+    print("I'm sorry, you cannot purchase the subscription.")
