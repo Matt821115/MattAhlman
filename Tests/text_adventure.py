@@ -1,8 +1,9 @@
 import random
 print("\nWelcome to the Dungeons & Dragons based text adventure!\n\n")
 
-#   currency
+#   currency/variables
 gold = 100
+drinks = 1
 
 #   dice rolling
 def roll_dice(d):
@@ -29,12 +30,27 @@ def char_stats(stre_mod, intel_mod, wis_mod, const_mod, dex_mod, cha_mod):
     global const
     global dex
     global cha
+    global stre_bonus
+    global intel_bonus
+    global wis_bonus
+    global const_bonus
+    global dex_bonus
+    global cha_bonus
+    # stat updating
     stre = stat_fix(int(stre + stre_mod))
     intel = stat_fix(int(intel + intel_mod))
     wis = stat_fix(int(wis + wis_mod))
     const = stat_fix(int(const + const_mod))
     dex = stat_fix(int(dex + dex_mod))
     cha = stat_fix(int(cha + cha_mod))
+    # stat bonuses
+    stre_bonus = round((stre - 10) / 2)
+    intel_bonus = round((intel - 10) / 2)
+    wis_bonus = round((wis - 10) / 2)
+    const_bonus = round((const - 10) / 2)
+    dex_bonus = round((dex - 10) / 2)
+    cha_bonus = round((cha - 10) / 2)
+    # show player the stats
     print("Strength: " + str(stre) + 
           "\nIntelligence: " + str(intel) + 
           "\nWisdom: " + str(wis) + 
@@ -138,6 +154,7 @@ def choose_template():
     else:
         print("IVALID INPUT TRY AGAIN\n")
         choose_template()
+    print("You also start with " + str(gold) + " Gold.\n")
 
 # class choice for custom character
 def dnd_classe(clas):
@@ -189,14 +206,56 @@ def choose_custom():
     else:
         choose_custom()
     dnd_classe(dnd_class)
+    print("You also start with " + str(gold) + " Gold.\n")
 
 #   tavern story
 def tavern():
-    choice = input("\n>> ").lower()
-    if choice == "pay":
+    global gold
+    global drinks
+    global intel_bonus
+    global wis_bonus
+    global stre_bonus
+    tab = 10 * drinks
+    print("\nYou may:" \
+    "\nPAY your tab" \
+    "\nOrder ANOTHER round" \
+    "\nAttempt to FLEA without paying your tab")
+    choice = input(">> ").lower()
+    alcohol_toxicity = drinks / 5
+    if alcohol_toxicity >= 5:
+        print("\nYou have too much alcohol in you."
+        "\nYou die from alcohol poisoning.\n")
+        return
+    elif alcohol_toxicity == 4:
+        intel_bonus = intel_bonus - 4
+        wis_bonus = wis_bonus - 3
+        stre_bonus = stre_bonus - 2
+    elif alcohol_toxicity == 3:
+        intel_bonus = intel_bonus - 3
+        wis_bonus = wis_bonus - 2
+        stre_bonus = stre_bonus - 1
+    elif alcohol_toxicity == 2:
+        intel_bonus = intel_bonus - 2
+        wis_bonus = wis_bonus - 1
+    elif alcohol_toxicity == 1:
+        intel_bonus = intel_bonus - 1
+    else:
         print()
-
-
+    if choice == "pay":
+        if gold >= tab:
+            gold = gold - tab
+            print("You pay " + str(gold) + "Gold for " + str(drinks) + "drinks."
+            "\nYou now have " + str(gold) + "Gold.")
+        else:
+            print("You cannot pay your tab. You may attempt to flea.")
+            tavern()
+    elif choice == "another":
+        print("\nYou order another round.")
+        drinks = drinks + 1
+        tab = 10 * drinks
+        print("Your tab is now " + str(tab) + " gold, for " + str(drinks) + " drinks."
+        "\nYou have " + str(gold) + " Gold.")
+        tavern()
 
 #   start up
 def DnD():
@@ -214,10 +273,9 @@ def DnD():
     else:
         print("INVALID INPUT TRY AGAIN\n")
         DnD()
-    '''print("And so your story starts here. You may leave the tavern as you choose." \
-    "\nMake sure to pay your tab before you leave\n" \
-    "\nEnter PAY to pay your tab" \
-    "\nEnter ANOTHER to order another round" \
-    "\nEnter FLEA to attempt to leave without paying your tab")'''
+    print("And so your story starts here. All choices with text input are CAPITALS." \
+    "\nYou may leave the tavern as you choose." \
+    "\nMake sure to pay your tab before you leave. :)")
+    tavern()
 
 DnD()
