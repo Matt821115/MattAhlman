@@ -52,7 +52,7 @@ def char_stats(stre_mod, intel_mod, wis_mod, const_mod, dex_mod, cha_mod):
     dex_bonus = round((dex - 10) / 2)
     cha_bonus = round((cha - 10) / 2)
     # show player the stats
-    print("Strength: " + str(stre) + 
+    print("\nStrength: " + str(stre) + 
           "\nIntelligence: " + str(intel) + 
           "\nWisdom: " + str(wis) + 
           "\nConstitution: " + str(const) + 
@@ -69,7 +69,7 @@ def barbarian():
     print("Barbarian stats updated")
     char_stats(9, 0, 1, 6, 2, -1)
     global gold
-    gold = gold - 100
+    gold = gold - 75
 def wizard():
     print("Wizard stats updated")
     char_stats(2, 9, 7, 6, 3, 4)
@@ -93,35 +93,35 @@ def bard():
 
 #   races
 def human():
-    print("Human stats updated")
+    print("\nHuman stats updated")
     char_stats(4, 2, 2, 1, 2, 2)
     global gold
     gold = gold + 25
 def dwarf():
-    print("Dwarf stats updated")
+    print("\nDwarf stats updated")
     char_stats(5, 3, 2, 5, 3, 1)
     global gold
     gold = gold - 25
 def gnome():
-    print("Gnome stats updated")
+    print("\nGnome stats updated")
     char_stats(3, 6, 6, 4, 1, 4)
     global gold
-    gold = gold - 75
+    gold = gold - 50
 def tiefling():
-    print("Tiefling stats updated")
+    print("\nTiefling stats updated")
     char_stats(3, 6, 3, 4, 7, -3)
     global gold
     gold = gold -25
 def dragonborn():
-    print("Dragonborn stats updated")
+    print("\nDragonborn stats updated")
     char_stats(9, 7, 7, 4, -1, -2)
     global gold
     gold = gold + 50
 def sethling():
-    print("Sethling stats updated")
+    print("\nSethling stats updated")
     char_stats(2, -2, -4, 0, 0, 4)
     global gold
-    gold = gold - 90
+    gold = gold - 75
 
 #   character template choosing
 def choose_template():
@@ -133,7 +133,7 @@ def choose_template():
     "\n5 = Dragonborn Cleric" \
     "\n6 = Sethling Bard" \
     "\n>> "))
-    print("")
+    #
     if template == 1:
         human()
         fighter()
@@ -221,13 +221,16 @@ def choose_custom():
 
 #   the streets
 def streets():
-    print("In the streets.")
+    print("In the streets.\n" \
+    "\nThis is the end of the story for now >:3")
     return
 
 #   tavern story
 def caught():
     global drinks
-    print("Where do you thinking you're going? The Keeper asks. You may:" \
+    global picked
+    print("\n'Where do you thinking you're going?' The Keeper asks." \
+    "\nYou may:" \
     "\nEXPLAIN yourself" \
     "\nOFFER to do a job to pay back your debt" \
     "\nAttempt to ESCAPE again" \
@@ -235,55 +238,71 @@ def caught():
     "\nApologize and PAY your tab.")
     choice = input(">> ").lower()
     if choice == "explain" and picked == 0:
-        print("You explain your situation in hopes The Keeper has sympathy.")
+        print("\nYou explain your situation in hopes The Keeper has sympathy.")
         fail_save = roll_dice(20) + cha_bonus
         if drinks >= 20:
             if fail_save >= 18:
-                print("The Keeper believes you. You are free to go.")
+                print("\nThe Keeper believes you. You are free to go.")
                 streets()
             else:
-                print("The Keeper doesn't believe you." \
+                print("\nThe Keeper doesn't believe you." \
                 "\nYou must pay your tab or offer to pay back your debt." \
                 "\nIf this choice is picked again the keeper will attack you.")
                 picked = 1
+                caught()
         elif drinks >= 15:
             if fail_save >= 16:
                 print("The Keeper believes you. You are free to go.")
                 streets()
             else:
-                print("The Keeper doesn't believe you." \
+                print("\nThe Keeper doesn't believe you." \
                 "\nYou must pay your tab or offer to pay back your debt." \
                 "\nIf this choice is picked again the keeper will attack you.")
                 picked = 1
+                caught()
         elif drinks >= 10:
             if fail_save >= 12:
                 print("The Keeper believes you. You are free to go.")
                 streets()
             else:
-                print("The Keeper doesn't believe you." \
+                print("\nThe Keeper doesn't believe you." \
                 "\nYou must pay your tab or offer to pay back your debt." \
                 "\nIf this choice is picked again the keeper will attack you.")
                 picked = 1
+                caught()
         elif drinks >= 5:
             if fail_save >= 10:
-                print("The Keeper believes you. You are free to go.")
+                print("\nThe Keeper believes you. You are free to go.")
                 streets()
             else:
-                print("The Keeper doesn't believe you." \
+                print("\nThe Keeper doesn't believe you." \
                 "\nYou must pay your tab or offer to pay back your debt." \
                 "\nIf this choice is picked again the keeper will attack you.")
                 picked = 1
+                caught()
         elif drinks >= 1:
             if fail_save >= 8:
-                print("The Keeper believes you. You are free to go.")
+                print("\nThe Keeper believes you. You are free to go.")
                 streets()
             else:
-                print("The Keeper doesn't believe you." \
+                print("\nThe Keeper doesn't believe you." \
                 "\nYou must pay your tab or offer to pay back your debt." \
                 "\nIf this choice is picked again the keeper will attack you.")
                 picked = 1
+                caught()
+    elif choice == "offer":
+        print("\nYou offer to pay back your debt via doing work for The Keeper.")
+        #pay_debt()
+        return
+    elif choice == "escape":
+        fail_save = roll_dice(20) + cha_bonus
+        fail_save_disadv = roll_dice(20) + cha_bonus
+        if fail_save <= fail_save_disadv:
+            print()
+        elif fail_save_disadv <= fail_save:
+            print()
     elif picked == 1:
-            print("The Keeper finds you stupid and kills you on the spot, robbing your corpse." \
+            print("\nThe Keeper finds you stupid and kills you on the spot, robbing your corpse." \
             "\nYou are dead, not big surprise.")
             return
     else:
@@ -299,7 +318,7 @@ def tavern(choice):
     print("\nYou may:" \
     "\nPAY your tab" \
     "\nOrder ANOTHER round" \
-    "\nAttempt to FLEA without paying your tab")
+    "\nAttempt to FLEE without paying your tab")
     choice = input(">> ").lower()
     alcohol_toxicity = drinks / 5
     if alcohol_toxicity >= 5:
@@ -319,31 +338,39 @@ def tavern(choice):
         wis_bonus = wis_bonus - 1
     elif alcohol_toxicity == 1:
         intel_bonus = intel_bonus - 1
-    else:
-        print()
+    #
     if choice == "pay":
         if gold >= tab:
             gold = gold - tab
-            print("You pay " + str(gold) + "Gold for " + str(drinks) + "drinks."
-            "\nYou now have " + str(gold) + "Gold.")
+            print("You pay " + str(tab) + " Gold for " + str(drinks) + "drinks."
+            "\nYou now have " + str(gold) + " Gold.")
         else:
-            print("You cannot pay your tab. You may attempt to flea.")
-            tavern()
+            print("You cannot pay your tab. You may attempt to flee.")
+            tavern(choice="")
     elif choice == "another":
         print("\nYou order another round.")
         drinks = drinks + 1
         tab = 10 * drinks
         print("Your tab is now " + str(tab) + " gold, for " + str(drinks) + " drinks."
         "\nYou have " + str(gold) + " Gold.")
-        tavern()
-    elif choice == "flea":
-        print("You attempt to flea.")
+        tavern(choice="")
+    elif choice == "flee":
+        print("You attempt to flee.")
         fail_save = roll_dice(20) + dex_bonus
         if fail_save >= 16:
             print("You successfully escape the tavern.")
-            #streets()
+            streets()
         else:
             print("You fail to escape the tavern without the keeper noticing you.")
+            caught()
+    elif choice == "developersonly":
+        caught()
+        drinks = 20
+        global cha_bonus
+        cha_bonus = -5
+    else:
+        print("INVALID INPUT")
+        tavern(choice="")
 
 #   start up
 def DnD():
@@ -364,6 +391,6 @@ def DnD():
     print("And so your story starts here. All choices with text input are CAPITALS." \
     "\nYou may leave the tavern as you choose." \
     "\nMake sure to pay your tab before you leave. :)")
-    tavern()
+    tavern(choice="")
 
 DnD()
