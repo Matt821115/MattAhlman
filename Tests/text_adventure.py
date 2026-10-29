@@ -221,12 +221,42 @@ def choose_custom():
 
 #   the streets
 def streets():
-    print("In the streets.\n" \
-    "\nThis is the end of the story for now >:3")
+    print("\nIn the streets.\n" \
+    "\nKey:" \
+    "\n o = you" \
+    "\n | = city wall" \
+    "\n [_] = building" \
+    "\n /-|" \
+    "\n |_| = tavern" \
+    "\n  .-." \
+    "\n ( m ) = water fountain" \
+    "\n  '-'")
+    #
+    print( \
+    "\n| .        .  -     [ |"
+    "\n|_  .  '        .   [ |" \
+    "\n| ]     -     .     [_|" \
+    "\n| ]   .           .   |" \
+    "\n|_]         .        _|" \
+    "\n|   .   -        .  [ |" \
+    "\n|_        .-.  .    [ |" \
+    "\n| ]   .  ( m )  -   [ |" \
+    "\n| ]       '-'     . [_|" \
+    "\n|_].         .        |" \
+    "\n|       .        -    |" \
+    "\n|'            .   /-|" \
+    "\n| ]  .       -      [ |" \
+    "\n| ]   -    .      o [_|" \
+    "\n|_]      .    -    .  |"
+    )
+    #
+    print("\nThis is the end of the story for now >:3")
     return
 
 #   tavern story
 def caught():
+    global gold
+    global tab
     global drinks
     global picked
     print("\n'Where do you thinking you're going?' The Keeper asks." \
@@ -295,12 +325,34 @@ def caught():
         #pay_debt()
         return
     elif choice == "escape":
-        fail_save = roll_dice(20) + cha_bonus
-        fail_save_disadv = roll_dice(20) + cha_bonus
+        fail_save = roll_dice(20) + dex_bonus
+        fail_save_disadv = roll_dice(20) + dex_bonus
         if fail_save <= fail_save_disadv:
-            print()
+            result = fail_save
         elif fail_save_disadv <= fail_save:
-            print()
+            result = fail_save_disadv
+        elif fail_save == fail_save_disadv:
+            result = fail_save_disadv
+        #
+        if result >= 16:
+            print("You escape The Keeper.")
+            streets()
+        elif result <16:
+            print("You fail to escape The Keeper.")
+            #the_keeper_fight()
+    elif choice == "fight":
+        print("You decide to fight The Keeper.")
+        #the_keeper_fight()
+    elif choice == "pay":
+        if tab > gold:
+            print("You do not have enough money to pay your tab." \
+            "\nYou must find another solution.")
+            caught()
+        elif tab <= gold:
+            gold = gold - tab
+            print("You pay your tab and The Keeper allows you to leave the Tavern." \
+            "\nYou are now at " + gold + " Gold.")
+            streets()
     elif picked == 1:
             print("\nThe Keeper finds you stupid and kills you on the spot, robbing your corpse." \
             "\nYou are dead, not big surprise.")
@@ -314,6 +366,7 @@ def tavern(choice):
     global intel_bonus
     global wis_bonus
     global stre_bonus
+    global tab
     tab = 10 * drinks
     print("\nYou may:" \
     "\nPAY your tab" \
@@ -385,6 +438,13 @@ def DnD():
         choose_custom()
     elif char == "template":
         choose_template()
+    elif char == "devchar":
+        tiefling()
+        barbarian()
+        global gold
+        global dex_bonus
+        gold = 0
+        dex_bonus = 0
     else:
         print("INVALID INPUT TRY AGAIN\n")
         DnD()
