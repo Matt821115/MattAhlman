@@ -6,14 +6,21 @@ bot = False
 gainbot = False
 spent = 0
 gain = 0
+cycle = 0
 
 def net_worth():
     global spent
     global gain
     global gainbot
+    global cycle
     net = spent + gain
     if net <= 0:
+        cycle += 1
         gain_loss = "loss"
+        if cycle == 500:
+            print("Failed to earn money in 500 tries.")
+            gainbot = False
+            cycle = 0
     else:
         gain_loss = "gain"
         gainbot = False
@@ -26,6 +33,7 @@ def crate():
     global gainbot
     global spent
     global gain
+    global cycle
     if not bot and not gainbot:
         global choice
         choice = input("\nWould you like to open a crate? ($5)" \
@@ -74,6 +82,7 @@ def crate():
     elif choice == "winbot":
         print("\n(Net gain bot is on)\n")
         gainbot = True
+        cycle = 0
         crate()
     elif choice == "n":
         print("You leave the shop.")
