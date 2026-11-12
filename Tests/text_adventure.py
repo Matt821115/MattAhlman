@@ -221,10 +221,11 @@ def choose_custom():
 
 #   the streets
 def streets():
-    print("\nIn the streets.\n" \
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" \
+    "\nIn the streets...\n" \
     "\nKey:" \
     "\n o = you" \
-    "\n | = city wall" \
+    "\n || = city wall" \
     "\n [_] = building" \
     "\n /-|" \
     "\n |_| = tavern" \
@@ -233,21 +234,21 @@ def streets():
     "\n  '-'")
     #
     print( \
-    "\n|                                 [ |"
-    "\n|_                                [ |" \
-    "\n| ]                               [_|" \
-    "\n| ]                                 |" \
-    "\n|_]                                _|" \
-    "\n|                                 [ |" \
-    "\n|_               .-.              [ |" \
-    "\n| ]             ( m )             [ |" \
-    "\n| ]              '-'              [_|" \
-    "\n|_]                                 |" \
-    "\n|                                   |" \
-    "\n|                                 /-|" \
-    "\n| ]                               [ |" \
-    "\n| ]                              o[_|" \
-    "\n|_]                                 |"
+    "\n||                                 [ ||"
+    "\n||_                                [ ||" \
+    "\n|| ]                               [_||" \
+    "\n|| ]                                 ||" \
+    "\n||_]                                _||" \
+    "\n||                                 [ ||" \
+    "\n||_               .-.              [ ||" \
+    "\n|| ]             ( m )             [ ||" \
+    "\n|| ]              '-'              [_||" \
+    "\n||_]                                 ||" \
+    "\n||                                   ||" \
+    "\n||                                 /-||" \
+    "\n|| ]                               [ ||" \
+    "\n|| ]                              o[_||" \
+    "\n||_]                                 ||"
     )
     #
     print("\nThis is the end of the story for now >:3")
@@ -359,6 +360,7 @@ def caught():
     else:
         print("INVALID INPUT")
         caught()
+    
 def tavern(choice):
     global gold
     global drinks
@@ -394,8 +396,9 @@ def tavern(choice):
     if choice == "pay":
         if gold >= tab:
             gold = gold - tab
-            print("You pay " + str(tab) + " Gold for " + str(drinks) + "drinks."
+            print("\nYou pay " + str(tab) + " Gold for " + str(drinks) + " drinks."
             "\nYou now have " + str(gold) + " Gold.")
+            streets()
         else:
             print("You cannot pay your tab. You may attempt to flee.")
             tavern(choice="")
